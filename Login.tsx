@@ -5,7 +5,7 @@ import { View, Text, TextInput, Button, KeyboardAvoidingView, Platform, StyleShe
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
-const Login = () => {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,18 +18,18 @@ const Login = () => {
         username,
         password,
       });
-      
+
 
       //for console debugging
       console.log('Reponse:', response.data);
-      
 
-       // Navigate to SuccessScreen upon successful login
+
+      // Navigate to SuccessScreen upon successful login
       if (response.data.success) {
-       
+
         navigation.navigate('Home');
       } else {
-        setErrorMessage('Invalid credentials. Please try again.')
+        setErrorMessage('Invalid credentials. Please try again.');
       }
 
     } catch (error) {
@@ -59,21 +59,19 @@ const Login = () => {
           placeholder="Username"
           value={username}
           onChangeText={(text) => setUsername(text)}
-          accessibilityLabel="Username Input"
-        />
+          accessibilityLabel="Username Input" />
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry
           value={password}
           onChangeText={(text) => setPassword(text)}
-          accessibilityLabel="Password Input"
-        />
+          accessibilityLabel="Password Input" />
         <Button title="Login" onPress={handleLogin} />
       </View>
     </KeyboardAvoidingView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
