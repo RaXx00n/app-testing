@@ -1,9 +1,11 @@
+// Login.js
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = () => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,7 +27,7 @@ const LoginScreen = () => {
        // Navigate to SuccessScreen upon successful login
       if (response.data.success) {
        
-        navigation.navigate('Success');
+        navigation.navigate('Home');
       } else {
         setErrorMessage('Invalid credentials. Please try again.')
       }
@@ -96,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default Login;
