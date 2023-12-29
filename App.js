@@ -46,9 +46,10 @@ const CustomDrawerContent = ({ navigation }) => (
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home"
+      <Drawer.Navigator initialRouteName="Login"
         drawerContent={(props) => <CustomDrawerContent {...props} />}
         >
+        <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Settings" component={Settings} />
         <Drawer.Screen name="Profile" component={Profile} />

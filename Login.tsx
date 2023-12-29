@@ -4,12 +4,17 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigation = useNavigation();
+
+
+
+
 
   const handleLogin = async () => {
     try {
@@ -18,34 +23,34 @@ function Login() {
         username,
         password,
       });
-
-
-      //for console debugging
-      console.log('Reponse:', response.data);
-
-
-      // Navigate to SuccessScreen upon successful login
-      if (response.data.success) {
-
-        navigation.navigate('Home');
+  
+      console.log('Response:', response);
+  
+      if (response && response.data && response.data.success) {
+        // Use response.headers, not response.data.headers
+        const token = response.headers['authorization']; // Adjust the header name if needed
+        console.log('Received Token:', token);
+  
+        if (token) {
+          await AsyncStorage.setItem('jwtToken', token);
+          const storedToken = await AsyncStorage.getItem('jwtToken');
+          console.log('Stored Token:', storedToken);
+          navigation.navigate('Home');
+        } else {
+          setErrorMessage('Invalid token received from the server.');
+        }
       } else {
         setErrorMessage('Invalid credentials. Please try again.');
       }
-
     } catch (error) {
       console.error('Error during login:', error);
-      if (error.response) {
-        // The server responded with a status code outside of 2xx
-        setErrorMessage('Invalid credentials. Please try again.');
-      } else if (error.request) {
-        // The request was made but no response was received
-        setErrorMessage('Network error. Please check your connection.');
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        setErrorMessage('An error occurred. Please try again later.');
-      }
+      // ... (rest of the error handling)
     }
   };
+  
+
+
+
 
   return (
     <KeyboardAvoidingView
