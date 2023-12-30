@@ -19,7 +19,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       console.log('Attempting login...');
-      const response = await axios.post('http://172.31.9.191:3000/login/', {
+      const response = await axios.post('http://172.31.9.191:3000/auth/login/', {
         username,
         password,
       });

@@ -1,16 +1,22 @@
 //Profile.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import ProfileUpdateForm from './ProfileUpdateForm.js';
 
 const Profile = () => {
-  const navigation = useNavigation();
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+
+  const handleUpdateFormToggle = () => {
+    setShowUpdateForm(!showUpdateForm);
+  };
 
   return (
     <View>
-      <Text>Welcome to the Profile Screen!</Text>
+      <Text>This is the Profile Screen</Text>
+      <Button title="Update Profile" onPress={handleUpdateFormToggle} />
 
+      {showUpdateForm && <ProfileUpdateForm />}
     </View>
   );
 };

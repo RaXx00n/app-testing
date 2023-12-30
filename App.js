@@ -7,10 +7,12 @@ import Login from './Login.tsx';
 import Home from './Home.js';
 import Settings from './Settings.js';
 import Profile from './Profile.js';
+import  ProfileUpdateForm  from './ProfileUpdateForm.js';
 import Chat from './Chat.js';
 import Lobbies from './Lobbies.js';
 import {Image, Text, View} from 'react-native';
 import { DrawerItem } from '@react-navigation/drawer';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -52,7 +54,7 @@ const App = () => {
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Settings" component={Settings} />
-        <Drawer.Screen name="Profile" component={Profile} />
+        <Drawer.Screen name="Profile" component={ProfileUpdateForm} />
         <Drawer.Screen name="Chat" component={Chat} />
         <Drawer.Screen name="Lobbies" component={Lobbies} />
         {/* Add more screens here */}
